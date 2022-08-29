@@ -7,10 +7,8 @@ namespace MarvelSnapApi.Controllers
     [ApiController]
     public class CardController : ControllerBase
     {
-        [HttpGet]
-        public async Task<ActionResult<List<Card>>> Get()
-        {
-            var cards = new List<Card>
+
+        private static List<Card> cards = new List<Card>
             {
                 new Card
                 {
@@ -20,6 +18,10 @@ namespace MarvelSnapApi.Controllers
                     Power = 10
                 }
             };
+
+        [HttpGet]
+        public async Task<ActionResult<List<Card>>> Get()
+        {
 
             return Ok(cards);
         }

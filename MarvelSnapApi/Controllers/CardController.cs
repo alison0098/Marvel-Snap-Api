@@ -25,5 +25,12 @@ namespace MarvelSnapApi.Controllers
 
             return Ok(cards);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<List<Card>>> AddCard(Card card)
+        {
+            cards.Add(card);
+            return Ok(cards);
+        }
     }
 }

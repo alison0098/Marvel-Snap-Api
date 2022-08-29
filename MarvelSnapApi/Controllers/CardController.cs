@@ -32,5 +32,18 @@ namespace MarvelSnapApi.Controllers
             cards.Add(card);
             return Ok(cards);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<Card>>> GetCard(int id)
+        {
+            var filtered = cards.Find(x => x.Id == id);
+
+            if (filtered == null)
+            {
+                return BadRequest("Card not found!");
+            }
+
+            return Ok(filtered);
+        }
     }
 }

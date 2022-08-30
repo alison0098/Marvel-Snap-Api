@@ -45,5 +45,27 @@ namespace MarvelSnapApi.Controllers
 
             return Ok(filtered);
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<List<Card>>> UpdateCard(Card card)
+        {
+            var filtered = cards.Find(x => x.Id == card.Id);
+
+            if (filtered == null)
+            {
+                return BadRequest("Card not found!");
+            }
+
+            filtered.Id = card.Id;
+            filtered.Name = card.Name;
+            filtered.Text = card.Text;
+            filtered.Power = card.Power;
+            filtered.Cost = card.Cost;
+
+            return Ok(filtered);
+        }
+
+
+
     }
 }

@@ -15,7 +15,8 @@ namespace MarvelSnapApi.Controllers
                     Id = 1, Name = "Doctor Octopus",
                     Text = "On Reveal: Pull 4 random cards from your opponent's hand to their side of this location.",
                     Cost = 5,
-                    Power = 10
+                    Power = 10,
+                    Image = "imagem1.jpg"
                 }
             };
 
@@ -61,6 +62,8 @@ namespace MarvelSnapApi.Controllers
             filtered.Text = card.Text;
             filtered.Power = card.Power;
             filtered.Cost = card.Cost;
+            filtered.Image = card.Image;
+
 
             return Ok(filtered);
         }

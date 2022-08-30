@@ -65,7 +65,20 @@ namespace MarvelSnapApi.Controllers
             return Ok(filtered);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<List<Card>>> DeleteCard(int id)
+        {
+            var filtered = cards.Find(x => x.Id == id);
 
+            if (filtered == null)
+            {
+                return BadRequest("Card not found!");
+            }
+
+            cards.Remove(filtered);
+
+            return Ok(cards);
+        }
 
     }
 }

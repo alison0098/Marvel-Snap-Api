@@ -36,7 +36,9 @@ namespace MarvelSnapApi.Controllers
         [HttpPost]
         public async Task<ActionResult<List<Card>>> AddCard(Card card)
         {
-            cards.Add(card);
+            _context.Cards.Add(card);
+            await _context.SaveChangesAsync();
+
             return Ok(cards);
         }
 

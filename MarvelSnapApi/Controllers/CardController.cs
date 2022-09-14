@@ -30,7 +30,7 @@ namespace MarvelSnapApi.Controllers
         public async Task<ActionResult<List<Card>>> Get()
         {
 
-            return Ok(cards);
+            return Ok(await _context.Cards.ToListAsync());
         }
 
         [HttpPost]

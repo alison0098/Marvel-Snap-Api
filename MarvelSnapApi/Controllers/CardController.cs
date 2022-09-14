@@ -79,16 +79,17 @@ namespace MarvelSnapApi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<Card>>> DeleteCard(int id)
         {
-            var filtered = cards.Find(x => x.Id == id);
+            var dbCard = await _context.Cards.FindAsync(id);
 
-            if (filtered == null)
+            if (dbCard == null)
             {
                 return BadRequest("Card not found!");
             }
 
-            cards.Remove(filtered);
+            _context.Cards.Remove(dbCard);
+            await _context.SaveChangesAsync();
 
-            return Ok(cards);
+            return Ok(await _context.Cards.ToListAsync());
         }
 
     }

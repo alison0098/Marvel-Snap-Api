@@ -39,7 +39,7 @@ namespace MarvelSnapApi.Controllers
             _context.Cards.Add(card);
             await _context.SaveChangesAsync();
 
-            return Ok(cards);
+            return Ok(await _context.Cards.ToListAsync());
         }
 
         [HttpGet("{id}")]
@@ -56,24 +56,24 @@ namespace MarvelSnapApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<List<Card>>> UpdateCard(Card card)
+        public async Task<ActionResult<List<Card>>> UpdateCard(Card request)
         {
-            var filtered = cards.Find(x => x.Id == card.Id);
+            var dbCard = await _context.Cards.FindAsync(request.Id);
 
-            if (filtered == null)
+            if (dbCard == null)
             {
                 return BadRequest("Card not found!");
             }
 
-            filtered.Id = card.Id;
-            filtered.Name = card.Name;
-            filtered.Text = card.Text;
-            filtered.Power = card.Power;
-            filtered.Cost = card.Cost;
-            filtered.Image = card.Image;
+            dbCard.Id = request.Id;
+            dbCard.Name = request.Name;
+            dbCard.Text = request.Text;
+            dbCard.Power = request.Power;
+            dbCard.Cost = request.Cost;
+            dbCard.Image = request.Image;
 
-
-            return Ok(filtered);
+            await _context.SaveChangesAsync();
+            return Ok(await _context.Cards.ToListAsync());
         }
 
         [HttpDelete("{id}")]

@@ -41,9 +41,9 @@ namespace MarvelSnapApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<Card>>> GetCard(int id)
+        public async Task<ActionResult<Card>> GetCard(int id)
         {
-            var filtered = cards.Find(x => x.Id == id);
+            var filtered = await _context.Cards.FindAsync(id);
 
             if (filtered == null)
             {

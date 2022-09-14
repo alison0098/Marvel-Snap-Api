@@ -19,6 +19,12 @@ namespace MarvelSnapApi.Controllers
                     Image = "imagem1.jpg"
                 }
             };
+        private readonly DataContext _context;
+
+        public CardController(DataContext context)
+        {
+            _context = context;
+        }
 
         [HttpGet]
         public async Task<ActionResult<List<Card>>> Get()
